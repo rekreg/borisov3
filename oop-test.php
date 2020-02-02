@@ -3,6 +3,10 @@
 class Pet {
   public $name;
   public $age = 10;
+  
+  function say($w) {
+    echo "Object said $w";
+  }
 
 }
 
@@ -13,4 +17,6 @@ $dog = new Pet();
 $cat->name = "Марта";
 
 echo $cat->name;
+
+
 
