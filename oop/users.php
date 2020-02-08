@@ -35,6 +35,21 @@ class User {
   
 } // end User
 
+
+class SuperUser extends User {
+  public role = "";
+  
+  function __construct($name, $login, $password, $role){
+    $this->name = $name;
+    $this->login = $login;
+    $this->password = $password;
+    $this->role = $role;
+    
+  }
+  
+}
+
+
 $user1 = new User("Andrew", "Mirco84", "12345");
 
 $user2 = new User("Dima", "Dimon86", "54321");
