@@ -12,7 +12,7 @@ class User {
     $output .= "Логин: {$this->login}";
     $output .= "<br>";
     $output .= "Пароль: {$this->password}";
-    $output .= "<br><hr><br>";
+    $output .= "<br>";
 
     echo $output;
   }
@@ -28,6 +28,7 @@ class User {
   function __destruct(){
     //unset($this);
     echo "Пользователь ".$this->login. " удалён <br>"; 
+    
   }
   
   
@@ -37,28 +38,35 @@ class User {
 
 
 class SuperUser extends User {
-  public role = "";
+  public $role = "";
   
   function __construct($name, $login, $password, $role){
-    $this->name = $name;
-    $this->login = $login;
-    $this->password = $password;
+    
+    parent::__construct($name, $login, $password);
     $this->role = $role;
     
+  }
+  
+  public function showInfo() {
+    parent::showInfo();
+    echo "Роль: ".$this->role;
+    echo "<br>";
   }
   
 }
 
 
-$user1 = new User("Andrew", "Mirco84", "12345");
+$user1 = new SuperUser("Andrew", "Mirco84", "12345", "МегаМастер");
 
-$user2 = new User("Dima", "Dimon86", "54321");
+/*$user2 = new User("Dima", "Dimon86", "54321");
 
-$user3 = new User("Anatoliy", "Tolyshy", "1949");
+$user3 = new User("Anatoliy", "Tolyshy", "1949");*/
 
 
 
 $user1->showInfo();
+/*
 $user2->showInfo();
 $user3->showInfo();
+*/
 
