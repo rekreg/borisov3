@@ -4,7 +4,9 @@ class User {
   
   public $name = "";
   public $login = "";
-  public $password;
+  public $password = "";
+  
+  public static $UserCount = 0;
   
   public function showInfo() {
     $output = "Имя: {$this->name}";
@@ -23,6 +25,8 @@ class User {
     $this->login = $login;
     $this->password = $password;
     
+    self::$UserCount++;
+    
   }
   
   function __destruct(){
@@ -40,10 +44,16 @@ class User {
 class SuperUser extends User {
   public $role = "";
   
+  public static $SuperUserCount = 0;
+
+  
   function __construct($name, $login, $password, $role){
     
     parent::__construct($name, $login, $password);
     $this->role = $role;
+    
+    self::$SuperUserCount++;
+    parent::$UserCount--;
     
   }
   
@@ -56,15 +66,21 @@ class SuperUser extends User {
 }
 
 
-$user1 = new SuperUser("Andrew", "Mirco84", "12345", "МегаМастер");
+$user1 = new User("Andrew", "Mirco84", "12345", "МегаМастер");
+$user2 = new User("Dima", "Dimon86", "54321");
+$user3 = new User("Anatoliy", "Tolyshy", "1949");
 
-/*$user2 = new User("Dima", "Dimon86", "54321");
-
-$user3 = new User("Anatoliy", "Tolyshy", "1949");*/
-
+$user4 = new SuperUser("Andrew", "Mirco84", "12345", "МегаМастер");
+$user5 = new SuperUser("Dima", "Dimon86", "54321", "МегаЧел");
 
 
-$user1->showInfo();
+echo "Всего обычных пользователей: ".User::$UserCount;
+echo "<br>";
+echo "Всего супер-пользователей: ".SuperUser::$SuperUserCount;
+echo "<br>";
+
+
+//$user1->showInfo();
 /*
 $user2->showInfo();
 $user3->showInfo();

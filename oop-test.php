@@ -1,54 +1,55 @@
 <?php
 
-class Pet {
-  public $name;
-  public $age = 10;
-  public $type;
-  
-  function say($w) {
-    echo "{$this->name} said $w <br>";
-  }
-  
-  function functionName(){
-    echo "<p>Вызвана функция ".__FUNCTION__."<br>";
-  }
-  
-  function className(){
-    echo "<p>Используем класс ".__CLASS__."<br>";
-  }
-  
-  function methodName(){
-    echo "<p>Вызван метод ".__METHOD__."<br>";
-  }
-  
-  function __construct($type) {
-    $this->type = $type;
-    echo "{$type} СОЗДАН! <br>";
-  }
-  
-  function __destruct() {
-    //$this->type = $type;
-    echo "Удален! <br>";
-    
-  }
-  
-   
-  
 
+$o = new Simple();
+
+
+
+
+
+/*
+class Math {
+  const PI = M_PI;
+  
+  static function pow($base, $exp) {
+    return $base ** $exp;
+  }
 }
 
-$cat = new Pet("cat");
-$dog = new Pet("dog");
+
+echo Math::pow(2,3);
+*/
 
 
-$cat->name = "Марта";
-//echo $cat->name;
-$dog->name = "Тузик";
-$dog->say("Gav");
+/*class A {
+  public static $cntA = 0;
+  function __construct() {
+    ++self::$cntA;
+  }
+  function __clone() {
+    self::__construct();
+  }
+}
 
-$dog->functionName();
-$dog->className();
-$dog->methodName();
+
+class B extends A {
+  public static $cntB = 0;
+  function __construct() {
+    parent::__construct();
+    ++self::$cntB;
+    --parent::$cntA;
+  }
+}
 
 
+$a = new A();
+$b = new A();
+$c = new A();
+$d = clone $a;
+$x = new B(); 
+$y = new B();
+$z = new B();
 
+
+echo "A objects: ". A::$cntA . "<br>";
+echo "B objects: ". B::$cntB . "<br>";*/
