@@ -1,55 +1,26 @@
 <?php
 
-
-$o = new Simple();
-
-
-
-
-
-/*
-class Math {
-  const PI = M_PI;
+class User {
+  private $_name;
+  private $_age;
   
-  static function pow($base, $exp) {
-    return $base ** $exp;
+  function __construct($n, $a) {
+    $this->_age = $a;
+    $this->_name = $n;
   }
+  
+  function setName($n){
+    $this->_name = strtoupper($n);
+  }
+  function getName() {return $this->_name; }
+  
+  function getAge() {return $this->_age; }
+  
 }
 
 
-echo Math::pow(2,3);
-*/
+$u1 = new User("Andrey", 36);
 
-
-/*class A {
-  public static $cntA = 0;
-  function __construct() {
-    ++self::$cntA;
-  }
-  function __clone() {
-    self::__construct();
-  }
-}
-
-
-class B extends A {
-  public static $cntB = 0;
-  function __construct() {
-    parent::__construct();
-    ++self::$cntB;
-    --parent::$cntA;
-  }
-}
-
-
-$a = new A();
-$b = new A();
-$c = new A();
-$d = clone $a;
-$x = new B(); 
-$y = new B();
-$z = new B();
-
-
-echo "A objects: ". A::$cntA . "<br>";
-echo "B objects: ". B::$cntB . "<br>";*/
+//$u1->name = "John";
+$u1->setName("john");
+echo $u1->getAge();
