@@ -1,26 +1,26 @@
 <?php
 
 class User {
-  private $_name;
-  private $_age;
+  private $props = [];
   
-  function __construct($n, $a) {
-    $this->_age = $a;
-    $this->_name = $n;
+  function __set($n, $v) {
+    if($n == "name" or $n == "age")
+      $this->props[$n] = $v;
+    else
+      throw new Exception("Error set!");
   }
   
-  function setName($n){
-    $this->_name = strtoupper($n);
+  function __get($n) {
+    if($n == "name" or $n == "age")
+      return $this->props[$n];
+    else
+      throw new Exception("Error set!");
   }
-  function getName() {return $this->_name; }
-  
-  function getAge() {return $this->_age; }
   
 }
 
 
-$u1 = new User("Andrey", 36);
+$u1 = new User();
+$u1->name = "John";
 
-//$u1->name = "John";
-$u1->setName("john");
-echo $u1->getAge();
+echo $u1->name;
