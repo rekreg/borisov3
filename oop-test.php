@@ -40,6 +40,10 @@ class User {
     return ['x', 'y'];
   }
   
+  function __wakeup() {
+    
+  }
+  
 } // end User()
 
 
@@ -53,7 +57,7 @@ $str = serialize($u1);
 $obj = unserialize($str);
 
 echo "<pre>";
-print_r($obj);
+print_r($obj );
 echo "</pre>";
 //echo $u1;
 
