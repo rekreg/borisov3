@@ -2,6 +2,8 @@
 
 class User {
   private $props = [];
+  public $x = 100;
+  public $y = 200;
   
   function __set($n, $v) {
     if($n == "name" or $n == "age")
@@ -17,10 +19,42 @@ class User {
       throw new Exception("Error set!");
   }
   
-}
+  function __call($n, $args) {
+    echo "Call method $n with args ";
+    print_r($args);
+  }
+  
+  static function __callStatic($n, $args) {
+    echo "static method $n with args: ". implode(", ", $args);
+  }
+  
+  function __toString() {
+    return implode(", ", $this->props);
+  }
+  
+  function toArray() {
+    return (array)$this;
+  }
+  
+  function __sleep() {
+    return ['x', 'y'];
+  }
+  
+} // end User()
 
 
 $u1 = new User();
 $u1->name = "John";
+$u1->age = 25;
 
-echo $u1->name;
+
+$str = serialize($u1);
+
+$obj = unserialize($str);
+
+echo "<pre>";
+print_r($obj);
+echo "</pre>";
+//echo $u1;
+
+//echo $u1::foo(1,2,3);
