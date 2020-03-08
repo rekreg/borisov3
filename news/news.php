@@ -1,4 +1,9 @@
 <?php
+require_once "NewsDB.class.php";
+
+$news = new NewsDB();
+$errMsg = "";
+
 
 ?>
 <!DOCTYPE html>
@@ -10,7 +15,7 @@
 <body>
   <h1>Последние новости</h1>
   <?php
-
+     echo (!empty($errMsg)) ?: $errMsg;
   ?>
   <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
     Заголовок новости:<br />
