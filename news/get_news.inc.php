@@ -1,31 +1,40 @@
 <?php
 
-$result = $news->getNews();
+$items = $news->getNews();
 
-if(!$result) {
+if($items === false):
   $errMsg = "Произошла ошибка при выводе новостной ленты";
-} else {
-  echo "<pre>";
-  print_r($result);
-  echo "</pre>";
-  
-  $title = $result['title'];
-  $category = $result['category'];
-  $description = $result['description'];
-  $source = $result['source'];
-  $dt = $result['datetime'];
-  
-  $html = "<hr>";
-  $html .= "<h3>$title</h3>";
-  $html .= "<p>$description</p>";
-  $html .= "<p>Опубликована: ". date("d.m.Y H:i:s", $dt). "</p>";
-  $html .= "<a href='$source'>$source</a>";
- 
-  $html .= "<hr>";
+elseif(!count($items)):
+  $errMsg = "Новостей нет";
 
+else:
+  $html = "";
+  foreach($items as $item):
+    $title = $item['title'];
+    $category = $item['category'];
+    $description = $item['description'];
+    $source = $item['source'];
+    $dt = date("d.m.Y H:i:s", $item['datetime']);
+
+    $html .= "<hr>";
+    $html .= "<h3>$title</h3>";
+    $html .= "<p>";
+    $html .= $description;
+    $html .= "<br><br>";
+    $html .= $category . " | ".$dt;
+    $html .= " | <a href='$source'>$source</a>";
+    $html .= "</p>";
+    $html .= "<p align='right'>";
+    $html .= "<a href='news.php?del=".$item['id']."'>Удалить</a>";
+    $html .= "</p>";
+    
+
+   
+  endforeach;
+    $html .= "<hr>";
   echo $html;
   
-}
+endif;
   
 
   

@@ -64,7 +64,14 @@ class NewsDB implements INewsDB {
     return $this->_db->exec($sql);
         
   }
-   
+  
+  function db2Arr($data) {
+    $arr = [];
+    while($row = $data->fetchArray(SQLITE3_ASSOC))
+      $arr[] = $row;
+    return $arr;
+  }
+  
   function getNews(){
     
     $sql = "SELECT msgs.id as id, title, category.name as category, description, source, datetime";
@@ -72,8 +79,11 @@ class NewsDB implements INewsDB {
     $sql .= " WHERE category.id = msgs.category";
     $sql .= " ORDER BY msgs.id DESC";
     
-    $result = $this->_db->query($sql);
-    return $result->fetchArray(SQLITE3_ASSOC);
+    $items = $this->_db->query($sql);
+    if(!$items)
+      return false;
+    return $this->db2Arr($items);
+    
   }
   
   function deleteNews($id){}
