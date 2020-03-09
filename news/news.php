@@ -1,8 +1,12 @@
 <?php
-require_once "NewsDB.class.php";
+require "NewsDB.class.php";
 
 $news = new NewsDB();
 $errMsg = "";
+
+if($_SERVER["REQUEST_METHOD"] === "POST")
+  require "save_news.inc.php";
+
 
 
 ?>
@@ -15,7 +19,8 @@ $errMsg = "";
 <body>
   <h1>Последние новости</h1>
   <?php
-     echo (!empty($errMsg)) ?: $errMsg;
+     if($errMsg)
+       echo "<h3>$errMsg</h3>"; 
   ?>
   <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
     Заголовок новости:<br />

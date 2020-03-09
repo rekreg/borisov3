@@ -47,14 +47,37 @@ class NewsDB implements INewsDB {
   function __set($name, $value){
     throw new Exception(self::ERR_PROPERTY);
   }
-  
-  function saveNews($title, $category, $description, $source){}
+  /**
+	 *	Добавление новой записи в новостную ленту
+	 *	
+	 *	@param string $title - заголовок новости
+	 *	@param string $category - категория новости
+	 *	@param string $description - текст новости
+	 *	@param string $source - источник новости
+	 *	
+	 *	@return boolean - результат успех/ошибка
+	*/
+  function saveNews($title, $category, $description, $source){
+    $dt = time();
+    $sql = "INSERT INTO msgs (title, category, description, source, datetime) VALUES ('$title', '$category', '$description', '$source', $dt)";
+    
+    return $this->_db->exec($sql);
+        
+  }
    
   function getNews(){}
   
   function deleteNews($id){}
   
+  function escape($data) {
+    return $this->_db->escapeString(trim(strip_tags($data)));
+  }
+  
+  function clearInt($num) {
+    return abs((int) $num);
+  }
+  
 } // end class NewsDB 
 
 
-$news = new NewsDB();   
+ 
