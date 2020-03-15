@@ -7,7 +7,8 @@ $errMsg = "";
 if($_SERVER["REQUEST_METHOD"] === "POST")
   require "save_news.inc.php";
 
-
+if(isset($_GET["del"]))
+  require "delete_news.inc.php";
 
 ?>
 <!DOCTYPE html>
